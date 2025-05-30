@@ -1,0 +1,85 @@
+spring:
+  mvc:
+    hiddenmethod:
+      filter:
+        enabled: true
+  config:
+    name: N.I.M
+  application:
+    name: N.I.M Global
+
+  ai:
+    ollama:
+      base-url: http://ollama:11434
+      chat:
+        options:
+          model: deepseek-coder
+
+  datasource:
+    url: jdbc:oracle:thin:@oracle.fiap.com.br:1521:orcl
+    username: rm552669
+    password: fiap25
+    driver-class-name: oracle.jdbc.OracleDriver
+    hikari:
+      maximum-pool-size: 2
+  jpa:
+    hibernate:
+      ddl-auto: create
+    database-platform: org.hibernate.dialect.OracleDialect
+    properties:
+      "[hibernate.generate_statistics]" : false
+
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
+    listener:
+      simple:
+        message-converter: jackson2JsonMessageConverter
+      deserialization:
+        trusted-packages: com.fiap.globaljava.model
+
+springdoc:
+  api-docs:
+    path: /api-docs
+
+jwt:
+  secret-key: 890uirwjggifokrwjpgeo5yldfsopgis80f7erw8fuyw9f8ew9f7w4r67347f397tyfg347f367ferw7fr7efger77rtgw7erfw7yfeuyfwe67rfwef67w78erfwe7
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  info:
+    env:
+      enabled: true
+  endpoint:
+    health:
+      enabled: true
+      show-details: always
+    metrics:
+      enabled: true
+    info:
+      enabled: true
+    auditevents:
+      enabled: true
+    prometheus:
+      enabled: true
+info:
+  application:
+    nome: ${spring.application.name}
+    descricao: Aplicação MVC para a global solutions
+
+  admin:
+    image:
+
+server:
+  port: 8082
+
+logging:
+  level:
+    org.springframework.security: DEBUG
+    org.springframework.web: DEBUG
+    org.hibernate.SQL: DEBUG
