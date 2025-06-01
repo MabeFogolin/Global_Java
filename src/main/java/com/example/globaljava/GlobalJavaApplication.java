@@ -27,9 +27,7 @@ public class GlobalJavaApplication {
     private final UsuarioRepository usuarioRepository;
     private final AlertaRepository alertaRepository;
     private final FuncionarioRepository funcionarioRepository;
-
-
-
+    private final HistoricoRepository historicoRepository;
 
     public static void main(String[] args) {
         SpringApplication.run(GlobalJavaApplication.class, args);
@@ -48,7 +46,12 @@ public class GlobalJavaApplication {
 
         userSecurityRepository.save(admin);
 
+        Historico historico = Historico.builder()
+                .quantidadeAlertas(0)
+                .alertas(new ArrayList<>())
+                .build();
 
+        historico = historicoRepository.save(historico);
 
         Usuario usuarioSalvo = Usuario.builder()
                 .cpfUser("59997259092")
@@ -57,8 +60,11 @@ public class GlobalJavaApplication {
                 .telefoneUser("1234567890")
                 .dataNascimentoUser(LocalDate.of(1990, 1, 1))
                 .emailUser("mariateste.fogolin@example.com")
+                .historico(historico)
+                .endereco(null)
                 .build();
-        usuarioRepository.save(usuarioSalvo);
+
+        usuarioSalvo = usuarioRepository.save(usuarioSalvo);
 
         Alerta alerta = Alerta.builder()
                 .dataAlerta(new java.sql.Date(System.currentTimeMillis()))
@@ -68,9 +74,14 @@ public class GlobalJavaApplication {
                 .evento("Teste de Alerta")
                 .gravidade(3)
                 .usuario(usuarioSalvo)
+                .historico(historico)
                 .build();
 
         alertaRepository.save(alerta);
+
+        historico.getAlertas().add(alerta);
+        historico.setQuantidadeAlertas(historico.getQuantidadeAlertas() + 1);
+        historicoRepository.save(historico);
 
         Endereco endereco = Endereco.builder()
                 .ruaEndereco("Rua Exemplo")
@@ -94,6 +105,8 @@ public class GlobalJavaApplication {
         endereco.setFuncionario(funcionario);
 
         funcionarioRepository.save(funcionario);
+
         System.out.println("Usuário de segurança 'admin' criado com sucesso.");
     }
+
 }

@@ -63,7 +63,4 @@ public class Funcionario {
     @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
     private Endereco endereco;
 
-    @OneToMany(mappedBy = "funcionario", fetch = FetchType.LAZY, orphanRemoval = true)
-    @JsonIgnore
-    private List<Sensor> sensores = new ArrayList<>();
-}
+ }

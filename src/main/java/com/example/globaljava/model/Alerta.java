@@ -43,13 +43,14 @@ public class Alerta {
     @NotNull
     private int gravidade;
 
-    @ManyToMany(fetch = FetchType.LAZY)
-    @JsonIgnore
-    private List<Sensor> sensor = new ArrayList<>();
-
 
     @ManyToOne(fetch = FetchType.LAZY)
     @NotNull
     @JoinColumn(name = "fk_user", referencedColumnName = "cpf_user", nullable = false)
     private Usuario usuario;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @NotNull
+    @JoinColumn(name = "fk_historico", nullable = false)
+    private Historico historico;
 }

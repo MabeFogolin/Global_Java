@@ -1,5 +1,6 @@
 package com.example.globaljava.controller;
 
+import com.example.globaljava.model.Historico;
 import com.example.globaljava.model.Usuario;
 import com.example.globaljava.repositories.UsuarioRepository;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -54,6 +55,12 @@ public class UsuarioController {
             model.addAttribute("erro", "CPF já cadastrado.");
             return "Usuario/cadastrar-usuario";
         }
+
+        Historico historico = new Historico();
+        historico.setUsuario(usuario);
+        historico.setQuantidadeAlertas(0);
+        usuario.setHistorico(historico);
+
         if (usuario.getEndereco() != null) {
             usuario.getEndereco().setUsuario(usuario);
         }
@@ -62,6 +69,7 @@ public class UsuarioController {
         redirectAttributes.addFlashAttribute("sucesso", "Usuário cadastrado com sucesso!");
         return "redirect:/usuarios";
     }
+
 
     @GetMapping("/{cpf}")
     public String listarUsuario(@PathVariable String cpf, Model model, RedirectAttributes redirectAttributes) {

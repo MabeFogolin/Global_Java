@@ -115,7 +115,7 @@
 <header class="cabecalho">
     <nav class="cabecalho__menu">
         <a class="cabecalho__menu__link" href="/usuarios" th:text="#{menu.usuarios}">Usuários</a>
-        <a class="cabecalho__menu__link" href="/sensores" th:text="#{menu.consultas}">Sensores</a>
+        <a class="cabecalho__menu__link" href="/sensores" th:text="#{menu.historicos}">Sensores</a>
         <a class="cabecalho__menu__link" href="/funcionarios" th:text="#{menu.funcionarios}">Funcionários</a>
         <a class="cabecalho__menu__link" href="/alertas" th:text="#{menu.registros}">Registros dos alertas</a>
     </nav>
@@ -167,8 +167,24 @@
     </div>
 
 
+    <div class="secao">
+        <h2 class="titulo">Histórico</h2>
+
+        <div th:if="${usuario.alertas != null}">
+            <div class="info"><i class="fa fa-road icon"></i><strong>Quantidade de alertas:</strong> <span th:text="${usuario.alertas.size()}"></span></div>
+        </div>
+        <div class="info" th:unless="${usuario.alertas != null}">
+            <i class="fa fa-exclamation-triangle icon" style="color: #ff0000;"></i>
+            <strong>Alertas:</strong> Nenhum alerta cadastrado
+        </div>
+    </div>
+
 
     <a href="/usuarios" class="button">Voltar</a>
+    <a th:href="@{/alertas/novo/{cpf}(cpf=${usuario.cpfUser})}" class="button button--novo-alerta">
+        <i class="fa fa-plus-circle icon"></i> Cadastrar novo alerta
+    </a>
+
 </div>
 
 </body>

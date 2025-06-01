@@ -63,14 +63,12 @@ public class Usuario {
     @JsonIgnore
     private List<Alerta> alertas = new ArrayList<>();
 
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private Historico historico;
 
     @JsonManagedReference
     @OneToOne(mappedBy = "usuario", orphanRemoval = true, cascade = CascadeType.ALL)
     private Endereco endereco;
-
-    @OneToOne(mappedBy = "usuario", fetch = FetchType.LAZY, cascade = CascadeType.PERSIST, orphanRemoval = true)
-    private Historico historico;
-
 
     public void setCpfUser(String cpfUser) {
         if (cpfUser != null) {

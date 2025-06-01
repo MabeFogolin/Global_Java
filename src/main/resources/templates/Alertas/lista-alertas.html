@@ -1,10 +1,8 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lista de Profissionais</title>
+    <title>Lista de Alertas</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         body {
@@ -13,39 +11,32 @@
             padding: 0;
             background-color: #f4f4f4;
         }
-
         .cabecalho {
             background-color: #0066ff;
             color: white;
             padding: 1rem 0;
             text-align: center;
         }
-
         .cabecalho__menu {
             display: flex;
             justify-content: center;
             gap: 2rem;
         }
-
         .cabecalho__menu__link {
             color: white;
             text-decoration: none;
             font-weight: bold;
         }
-
         .cabecalho__menu__link:hover {
             text-decoration: underline;
         }
-
         .style-tabela table {
-            float: left;
             border: 1px solid #ccc;
             border-bottom: 0;
             border-right: 0;
             font-size: 0.8em;
             width: 100%;
         }
-
         .style-tabela table tr td {
             padding: 0.5em;
             border: 1px solid #ccc;
@@ -53,39 +44,31 @@
             border-left: 0;
             text-align: center;
         }
-
         .style-tabela table td.top {
             background-color: #003EA6;
             color: #fff;
             font-size: 1.2em;
         }
-
         .style-tabela tbody tr {
             background-color: #fff;
             color: #666;
         }
-
         .style-tabela tbody tr:hover {
             background-color: #f4f4f4;
             color: #00bcc4;
         }
-
-        .style-tabela tbody tr td .editar {
+        .editar {
             color: #00d549;
             font-size: 1.2em;
             font-weight: bold;
-            display: inline;
             text-decoration: none;
         }
-
-        .style-tabela tbody tr td .deletar {
+        .deletar {
             color: #bf303c;
             font-size: 1.2em;
             font-weight: bold;
-            display: inline;
             text-decoration: none;
         }
-
         .titulo {
             color: #757575;
             font-size: 1.5em;
@@ -94,7 +77,6 @@
             padding-bottom: 10px;
             text-align: center;
         }
-
         .button-form {
             background-color: #39f;
             padding: 5px 10px;
@@ -105,13 +87,11 @@
             text-decoration: none;
             border-radius: 5px;
         }
-
         .borda-inversa {
             transition-duration: 0.5s;
             transition-property: background;
             box-shadow: inset 0 0 0 2px #39f, 0 0 1px rgba(0, 0, 0, 0);
         }
-
         .borda-inversa:hover {
             background: none;
             color: #39f;
@@ -121,55 +101,55 @@
 <body>
 <header class="cabecalho">
     <nav class="cabecalho__menu">
-        <a class="cabecalho__menu__link" href="/usuarios" th:text="#{menu.usuarios}">Usuários</a>
-        <a class="cabecalho__menu__link" href="/sensores" th:text="#{menu.historicos}">Sensores</a>
-        <a class="cabecalho__menu__link" href="/funcionarios" th:text="#{menu.funcionarios}">Funcionários</a>
-        <a class="cabecalho__menu__link" href="/alertas" th:text="#{menu.registros}">Registros dos alertas</a>
+        <a class="cabecalho__menu__link" href="/usuarios">Usuários</a>
+        <a class="cabecalho__menu__link" href="/sensores">Sensores</a>
+        <a class="cabecalho__menu__link" href="/funcionarios">Funcionários</a>
+        <a class="cabecalho__menu__link" href="/alertas">Registros dos alertas</a>
     </nav>
 </header>
 
-
-<h2 class="titulo">Funcionários Cadastrados</h2>
+<h2 class="titulo">Alertas Cadastrados</h2>
 
 <div class="style-tabela">
-    <table border="0" cellpadding="0" cellspacing="0">
-        <tbody>
+    <table>
+        <thead>
         <tr>
-            <td class="top center"><i class="fa fa-user-md"></i></td>
-            <td class="top center"><strong>Registro</strong></td>
-            <td class="top center"><strong>Nome</strong></td>
-            <td class="top center"><strong>Sobrenome</strong></td>
-            <td class="top center"><strong>Email</strong></td>
-            <td class="top center"><strong>Data de inscrição</strong></td>
-            <td class="top center" colspan="3" width="1"><strong>Ações</strong></td>
+            <td class="top"><i class="fa fa-bell"></i></td>
+            <td class="top"><strong>ID</strong></td>
+            <td class="top"><strong>Data</strong></td>
+            <td class="top"><strong>Hora</strong></td>
+            <td class="top"><strong>Evento</strong></td>
+            <td class="top"><strong>Gravidade</strong></td>
+            <td class="top"><strong>Usuário</strong></td>
+            <td class="top"><strong>Histórico</strong></td>
+            <td class="top" colspan="3"><strong>Ações</strong></td>
         </tr>
-        </tbody>
+        </thead>
         <tbody>
-        <tr th:each="funcionario : ${funcionarios}">
-            <td align="center"><i class="fa fa-calendar-check"></i></td>
-            <td align="center" th:text="${funcionario.registroFuncionario}"></td>
-            <td align="center" th:text="${funcionario.nomeFuncionario}"></td>
-            <td align="center" th:text="${funcionario.sobrenomeFuncionario}"></td>
-            <td align="center" th:text="${funcionario.emailFuncionario}"></td>
-            <td align="center" th:text="${funcionario.dataInscricaoFuncionario}"></td>
-            <td align="center">
-                <a th:href="@{/funcionarios/{registroFuncionario}(registroFuncionario=${funcionario.registroFuncionario})}"
-                   class="editar fas fa-search" title="Visualizar"></a>
+        <tr th:each="alerta : ${alertas}">
+            <td><i class="fa fa-exclamation-triangle"></i></td>
+            <td th:text="${alerta.id}"></td>
+            <td th:text="${#dates.format(alerta.dataAlerta, 'dd/MM/yyyy')}"></td>
+            <td th:text="${alerta.horario}"></td>
+            <td th:text="${alerta.evento}"></td>
+            <td th:text="${alerta.gravidade}"></td>
+            <td th:text="${alerta.usuario.nomeUser}">Usuário</td>
+            <td th:text="${alerta.historico.id}">Histórico</td>
+            <td>
+                <a th:href="@{/alertas/{id}(id=${alerta.id})}" class="editar fas fa-search" title="Visualizar"></a>
             </td>
-            <td align="center">
-                <a th:href="@{/funcionarios/editar/{registroFuncionario}(registroFuncionario=${funcionario.registroFuncionario})}"
-                   class="editar fa fa-edit" title="Editar"></a>
+            <td>
+                <a th:href="@{/alertas/editar/{id}(id=${alerta.id})}" class="editar fa fa-edit" title="Editar"></a>
             </td>
-            <td align="center">
-                <a th:href="@{/funcionarios/deletar/{registroFuncionario}(registroFuncionario=${funcionario.registroFuncionario})}"
-                   class="deletar fa fa-times-circle" title="Excluir" onclick="return confirm('Tem certeza que deseja excluir?');"></a>
+            <td>
+                <a th:href="@{/alertas/deletar/{id}(id=${alerta.id})}" class="deletar fa fa-times-circle" title="Excluir" onclick="return confirm('Tem certeza que deseja excluir?');"></a>
             </td>
         </tr>
         </tbody>
         <tfoot>
         <tr>
-            <td colspan="9" align="center">
-                <a href="/funcionarios/novo" class="button-form borda-inversa">Novo Funcionario</a>
+            <td colspan="11" align="center">
+                <a href="/alertas/novo" class="button-form borda-inversa">Novo Alerta</a>
             </td>
         </tr>
         </tfoot>
