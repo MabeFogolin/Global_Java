@@ -31,33 +31,11 @@ public class HistoricoController {
     public ModelAndView visualizarHistorico(@PathVariable Long id) {
         Optional<Historico> historico = historicoRepository.findById(String.valueOf(id));
         return historico
-                .map(h -> new ModelAndView("Historicos/visualizar-historico", "historico", h))
+                .map(h -> new ModelAndView("Historicos/listar-historico", "historico", h))
                 .orElseGet(() -> new ModelAndView("redirect:/historicos", "erro", "Histórico não encontrado."));
     }
 
 
-    @GetMapping("/editar/{id}")
-    public ModelAndView editarHistoricoForm(@PathVariable Long id) {
-        Optional<Historico> historicoOptional = historicoRepository.findById(String.valueOf(id));
-        return historicoOptional
-                .map(h -> new ModelAndView("Historicos/editar-historico", "historico", h))
-                .orElseGet(() -> new ModelAndView("redirect:/historicos", "erro", "Histórico não encontrado."));
-    }
-
-    @PostMapping("/editar")
-    public String atualizarHistorico(@ModelAttribute Historico historicoParam, Model model) {
-        Optional<Historico> historicoOptional = historicoRepository.findById(String.valueOf(historicoParam.getId()));
-
-        if (historicoOptional.isPresent()) {
-            Historico historicoExistente = historicoOptional.get();
-            historicoExistente.setQuantidadeAlertas(historicoParam.getQuantidadeAlertas());
-            historicoRepository.save(historicoExistente);
-            return "redirect:/historicos";
-        }
-
-        model.addAttribute("erro", "Erro ao atualizar o histórico.");
-        return "Historicos/editar-historico";
-    }
 
     @GetMapping("/deletar/{id}")
     public String deletarHistorico(@PathVariable Long id, Model model) {
