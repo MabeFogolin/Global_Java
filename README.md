@@ -171,7 +171,7 @@ Acesse [http://localhost:9090/targets](http://localhost:9090/targets) para verif
 
 ## 🎥 Demonstração
 
-📹 [Assista no YouTube](https://youtu.be/Ru4kCOUQZBg)
+📹 [Assista no YouTube](https://www.youtube.com/watch?v=NFv2Pl4vt54)
 
 ---
 
