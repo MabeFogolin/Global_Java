@@ -5,6 +5,16 @@ O projeto **N.I.M.** visa desenvolver um aplicativo para os usuários possam cad
 
 ---
 
+
+
+## 🔌 Execução com Docker
+
+```bash
+docker compose down
+docker-compose up --build
+docker exec -it ollama ollama pull deepseek-coder
+```
+---
 ## 🧪 Dados Iniciais Gerados (DataInitializer)
 
 ### 👤 Usuário
@@ -141,14 +151,7 @@ O projeto **N.I.M.** visa desenvolver um aplicativo para os usuários possam cad
 - **Aplicativo Móvel:** Kotlin
 - **Observabilidade:** Prometheus e Spring Boot Admin
 
----
 
-## 🔌 Execução com Docker
-
-```bash
-docker-compose up --build
-docker exec -it ollama ollama pull deepseek-coder
-```
 
 ### 📈 Ver métricas
 
