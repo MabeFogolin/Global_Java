@@ -5,13 +5,10 @@ O projeto **N.I.M.** visa desenvolver um aplicativo para os usuários possam cad
 
 ---
 
----
-
 ## 🎥 Pitch
 
 📹 [Assista no YouTube](https://www.youtube.com/watch?v=nOO2HYhBhrw&ab_channel=NicholasLima)
 
----
 ---
 
 ## 🎥 Demonstração
