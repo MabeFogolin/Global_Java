@@ -5,7 +5,20 @@ O projeto **N.I.M.** visa desenvolver um aplicativo para os usuários possam cad
 
 ---
 
+---
 
+## 🎥 Pitch
+
+📹 [Assista no YouTube](https://www.youtube.com/watch?v=nOO2HYhBhrw&ab_channel=NicholasLima)
+
+---
+---
+
+## 🎥 Demonstração
+
+📹 [Assista no YouTube](https://www.youtube.com/watch?v=NFv2Pl4vt54)
+
+---
 
 ## 🔌 Execução com Docker
 
@@ -166,12 +179,6 @@ Acesse [http://localhost:9090/targets](http://localhost:9090/targets) para verif
 
 ### Modelo Físico  
 ![Modelo Físico](Imagens/Relational_1.png)
-
----
-
-## 🎥 Demonstração
-
-📹 [Assista no YouTube](https://www.youtube.com/watch?v=NFv2Pl4vt54)
 
 ---
 
